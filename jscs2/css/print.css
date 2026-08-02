@@ -1,0 +1,197 @@
+/* ==========================================================================
+   AURA PENS - Printable Bill & Invoice Stylesheet
+   ========================================================================== */
+
+#printable-invoice-view {
+  display: none;
+}
+
+@media print {
+  /* Hide all website UI components */
+  body * {
+    visibility: hidden;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-family: 'Helvetica Neue', Arial, sans-serif !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Make only the Printable Invoice visible */
+  #printable-invoice-view, #printable-invoice-view * {
+    visibility: visible;
+  }
+
+  #printable-invoice-view {
+    display: block !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2.5cm 2cm;
+    background: #ffffff;
+    box-sizing: border-box;
+  }
+
+  .invoice-paper {
+    width: 100%;
+    margin: 0 auto;
+    background: #fff;
+    color: #111;
+  }
+
+  .invoice-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid #d4af37;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .invoice-brand {
+    font-family: 'Georgia', serif;
+  }
+
+  .invoice-brand h1 {
+    font-size: 24pt;
+    letter-spacing: 0.1em;
+    color: #111;
+    margin: 0;
+  }
+
+  .invoice-brand p {
+    font-size: 9pt;
+    color: #666;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .invoice-meta-box {
+    text-align: right;
+    font-size: 9.5pt;
+    line-height: 1.5;
+  }
+
+  .invoice-meta-box h2 {
+    font-size: 16pt;
+    color: #d4af37;
+    margin: 0 0 6px 0;
+    text-transform: uppercase;
+  }
+
+  .invoice-addresses {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    font-size: 10pt;
+    gap: 2rem;
+  }
+
+  .address-col {
+    flex: 1;
+    background: #fafafa;
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 4px;
+  }
+
+  .address-col h4 {
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #777;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 4px;
+  }
+
+  .invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    font-size: 9.5pt;
+  }
+
+  .invoice-table th {
+    background: #111;
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 8.5pt;
+    letter-spacing: 0.05em;
+  }
+
+  .invoice-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .invoice-table td.num {
+    text-align: right;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .invoice-totals-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2.5rem;
+  }
+
+  .invoice-totals-table {
+    width: 340px;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+  }
+
+  .invoice-totals-table td {
+    padding: 6px 12px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .invoice-totals-table td.label {
+    color: #555;
+  }
+
+  .invoice-totals-table td.val {
+    text-align: right;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+  }
+
+  .invoice-totals-table tr.grand-total td {
+    font-size: 12pt;
+    font-weight: 700;
+    color: #000;
+    border-top: 2px solid #111;
+    border-bottom: 2px solid #111;
+    padding: 10px 12px;
+    background: #fdfbf7;
+  }
+
+  .invoice-footer {
+    border-top: 1px solid #ddd;
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 8.5pt;
+    color: #666;
+  }
+
+  .seal-box {
+    border: 2px dashed #d4af37;
+    padding: 8px 16px;
+    color: #d4af37;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    display: inline-block;
+  }
+}
