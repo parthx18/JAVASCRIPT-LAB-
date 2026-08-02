@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grading System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Modern App Header -->
+        <header class="app-header">
+            <div class="header-badge">Academic Portal</div>
+            <h1>Student Grading System</h1>
+            <p class="subtitle">Control structures & dynamic grade assessment engine</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Input Form Card -->
+            <section class="card form-card">
+                <div class="card-header">
+                    <h2>Enter Student Details</h2>
+                    <p>Input student credentials and individual subject marks (0 - 100)</p>
+                </div>
+                <form id="gradingForm" novalidate>
+                    <div class="form-row main-details">
+                        <div class="form-group flex-2">
+                            <label for="studentName">Student Name</label>
+                            <input type="text" id="studentName" placeholder="Enter student full name" required>
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="rollNo">Roll No.</label>
+                            <input type="text" id="rollNo" placeholder="Enter roll number" required>
+                        </div>
+                    </div>
+
+                    <div class="section-divider">
+                        <span>Subject Marks (CS: Out of 200 | Others: Out of 100)</span>
+                    </div>
+
+                    <div class="form-row subjects-grid">
+                        <div class="form-group">
+                            <label for="english">English</label>
+                            <input type="number" id="english" min="0" max="100" placeholder="0 - 100" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="maths">Mathematics</label>
+                            <input type="number" id="maths" min="0" max="100" placeholder="0 - 100" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cs">Computer Science (CS)</label>
+                            <input type="number" id="cs" min="0" max="200" placeholder="0 - 200" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="physics">Physics</label>
+                            <input type="number" id="physics" min="0" max="100" placeholder="0 - 100" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="chemistry">Chemistry</label>
+                            <input type="number" id="chemistry" min="0" max="100" placeholder="0 - 100" required>
+                        </div>
+                    </div>
+
+                    <div id="errorMessage" class="error-banner hidden"></div>
+
+                    <div class="form-actions">
+                        <button type="submit" id="btnCalculate" class="btn btn-primary">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg>
+                            Calculate Grade
+                        </button>
+                        <button type="button" id="btnReset" class="btn btn-secondary">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                                <path d="M3 3v5h5" />
+                            </svg>
+                            Reset Form
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Summary Dashboard Cards Section -->
+            <section id="resultsSection" class="results-wrapper hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Overall Performance Summary</h2>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>STUDENT NAME</th>
+                                    <th>ROLL NO</th>
+                                    <th>TOTAL MARKS</th>
+                                    <th>PERCENTAGE</th>
+                                    <th>GRADE</th>
+                                    <th>STATUS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultsTableBody">
+                                <!-- Dynamic Content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detailed Report Card -->
+            <section id="reportCardSection" class="card hidden">
+                <div class="card-header">
+                    <h2>Official Academic Report Card</h2>
+                </div>
+                <div class="report-card-container">
+                    <div class="report-header-banner">
+                        <div class="student-info">
+                            <h3 id="reportStudentName">Student Name</h3>
+                            <p id="reportRollNo">Roll No: --</p>
+                        </div>
+                        <div class="report-badge-wrap" id="headerStatusBadge">
+                            <!-- PASS / FAIL Pill -->
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table report-table">
+                            <thead>
+                                <tr>
+                                    <th>SUBJECT</th>
+                                    <th>SCORE</th>
+                                    <th>PERFORMANCE BAR</th>
+                                    <th>STATUS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reportTableBody">
+                                <!-- Dynamic Subject Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="report-summary-cards" id="reportSummaryCards">
+                        <!-- Dynamic Summary Indicators -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- JS Concepts Reference Card -->
+            <section class="card concepts-card">
+                <div class="card-header">
+                    <h2>JavaScript Control Structures Applied</h2>
+                    <p>Demonstrating underlying JS algorithms & logic</p>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table concepts-table">
+                        <tbody>
+                            <tr>
+                                <td class="concept-code"><code>if / else</code></td>
+                                <td class="concept-desc">Comprehensive form validation, input range checking (0 - 100),
+                                    and pass/fail conditional evaluation.</td>
+                            </tr>
+                            <tr>
+                                <td class="concept-code"><code>switch</code></td>
+                                <td class="concept-desc">Calculates academic letter grade (A+, A, B+, B, C, F) based on
+                                    total percentage thresholds.</td>
+                            </tr>
+                            <tr>
+                                <td class="concept-code"><code>for</code></td>
+                                <td class="concept-desc">Iterates over all subject input nodes for bulk validation,
+                                    totaling marks, and table generation.</td>
+                            </tr>
+                            <tr>
+                                <td class="concept-code"><code>while</code></td>
+                                <td class="concept-desc">Scans array of subject scores to evaluate distinction counts
+                                    (subjects scored ≥ 75).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
