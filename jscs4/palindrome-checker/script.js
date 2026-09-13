@@ -3,7 +3,6 @@
    Demonstrates: function declarations, function expressions,
    arrow functions, variable scope, closures, try-catch
    ========================================================= */
-
 /* ---------- 1. FUNCTION DECLARATION ----------
    Hoisted — could technically be called before this line runs. */
 function cleanString(raw, ignoreSpaces, caseSensitive) {
