@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Down and Mouse Up</title>
+</head>
+<body>
+    <h2>Mouse Down and Mouse Up</h2>
+    <div id ="box" style="width: 200px; height: 100px; border: 1px solid black; text-align: center; line-height: 100px;">
+        Press mouse
+    </div>
+
+    <script>
+        const box = document.getElementById("box");
+        box.addEventListener("mousedown",function() {
+            box.innerHTML = "Mouse button pressed";
+        }
+        );
+        box.addEventListener("mouseup",function() {
+            box.innerHTML = "Mouse button released";
+        }
+        );
+    </script>
+    
+</body>
+</html>

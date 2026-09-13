@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key up event example</title>
+</head>
+<body>
+    <h2>Key up event example</h2>
+    <input type="text" id="name">
+    <p id="output"></p>
+    <script>
+        const textbox = document.getElementById("name");
+        textbox .addEventListener("keyup", function() {
+            document.getElementById("output").innerHTML = 
+            "You pressed: " + textbox.value;
+        });
+    </script>
+</body>
+</html>

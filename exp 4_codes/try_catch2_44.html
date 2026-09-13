@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>try_catch if else</title>
+</head>
+<body>
+    <h2>Age validation </h2>
+    <label for="age">Age:</label>
+    <input id="age" type="text" placeholder="Enter age">
+    <button onclick="checkAge()">Check</button>
+    <p id="result"></p>
+
+    <script>
+        function checkAge() {
+            try {
+                let age = document.getElementById("age").value;
+                if (age === "") {
+                    throw new Error("Age cannot be empty");
+                }
+                age = Number(age);
+                if (isNaN(age)) {
+                    throw new Error("Please enter a valid number");
+                }
+                if (age < 18) {
+                    throw new Error("You must be at least 18 years old");
+                }
+
+                document.getElementById("result").innerHTML = "You are eligible to vote";
+            } catch (error) {
+                document.getElementById("result").innerHTML = "Error: " + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

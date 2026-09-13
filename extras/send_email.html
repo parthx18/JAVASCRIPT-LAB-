@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Mailer - Send Email to Specific Recipient</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --card-bg: rgba(17, 24, 39, 0.85);
+      --card-border: rgba(99, 102, 241, 0.3);
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --accent: #06b6d4;
+      --gmail-red: #ea4335;
+      --outlook-blue: #0078d4;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --input-bg: rgba(11, 15, 25, 0.9);
+      --input-border: rgba(255, 255, 255, 0.15);
+      --success: #10b981;
+      --error: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.2) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.2) 0px, transparent 50%);
+      font-family: 'Inter', sans-serif;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 620px;
+    }
+
+    /* Form Glassmorphism Card */
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 0 25px rgba(99, 102, 241, 0.08);
+    }
+
+    .header {
+      margin-bottom: 28px;
+    }
+
+    .header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .header h1 span {
+      background: linear-gradient(135deg, #6366f1, #06b6d4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Template Presets */
+    .templates-section {
+      margin-bottom: 24px;
+    }
+
+    .templates-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .template-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--input-border);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .chip:hover {
+      background: rgba(99, 102, 241, 0.25);
+      border-color: var(--primary);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* Form Controls */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #e5e7eb;
+      margin-bottom: 8px;
+    }
+
+    .form-label span {
+      color: var(--primary);
+    }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .form-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .char-count {
+      text-align: right;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Action Buttons Group */
+    .button-group {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-gmail {
+      background: linear-gradient(135deg, #ea4335, #c5221f);
+      grid-column: span 1;
+    }
+
+    .btn-outlook {
+      background: linear-gradient(135deg, #0078d4, #005a9e);
+      grid-column: span 1;
+    }
+
+    .btn-mailto {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      grid-column: span 2;
+      padding: 16px;
+      font-size: 16px;
+    }
+
+    .btn-copy {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--input-border);
+      grid-column: span 2;
+    }
+
+    .btn-copy:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Alert Toast */
+    .toast {
+      display: none;
+      margin-top: 18px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast.success {
+      display: flex;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+    }
+
+    .toast.error {
+      display: flex;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #f87171;
+    }
+
+    @media (max-width: 480px) {
+      .button-group {
+        grid-template-columns: 1fr;
+      }
+      .btn-gmail, .btn-outlook, .btn-mailto, .btn-copy {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <h1>✉️ Direct <span>QuickMailer</span></h1>
+        <p>Send an email to a specific person via Gmail, Outlook, or your local Mail app.</p>
+      </div>
+
+      <!-- Quick Message Templates -->
+      <div class="templates-section">
+        <div class="templates-title">Quick Preset Templates</div>
+        <div class="template-chips">
+          <button class="chip" onclick="applyTemplate('inquiry')">💼 General Inquiry</button>
+          <button class="chip" onclick="applyTemplate('proposal')">🚀 Project Proposal</button>
+          <button class="chip" onclick="applyTemplate('greeting')">👋 Say Hello</button>
+        </div>
+      </div>
+
+      <form id="emailForm" onsubmit="event.preventDefault();">
+        <!-- Recipient Email Field -->
+        <div class="form-group">
+          <label class="form-label" for="recipientEmail">Target Recipient Email <span>*</span></label>
+          <input type="email" id="recipientEmail" class="form-input" placeholder="e.g. john.doe@example.com" value="target.person@example.com" required>
+        </div>
+
+        <!-- Sender Name Field -->
+        <div class="form-group">
+          <label class="form-label" for="senderName">Your Name <span>*</span></label>
+          <input type="text" id="senderName" class="form-input" placeholder="e.g. Alex Smith" required>
+        </div>
+
+        <!-- Subject Field -->
+        <div class="form-group">
+          <label class="form-label" for="subject">Subject Line <span>*</span></label>
+          <input type="text" id="subject" class="form-input" placeholder="What is this email about?" required>
+        </div>
+
+        <!-- Message Body -->
+        <div class="form-group">
+          <label class="form-label" for="messageBody">Message Body <span>*</span></label>
+          <textarea id="messageBody" class="form-textarea" placeholder="Type your message here..." oninput="updateCharCount()" required></textarea>
+          <div class="char-count" id="charCount">0 characters</div>
+        </div>
+
+        <!-- Action Buttons Group -->
+        <div class="button-group">
+          <!-- Primary Send Buttons -->
+          <button type="button" class="btn btn-gmail" onclick="sendVia('gmail')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            Send via Gmail Web
+          </button>
+
+          <button type="button" class="btn btn-outlook" onclick="sendVia('outlook')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            Send via Outlook Web
+          </button>
+
+          <button type="button" class="btn btn-mailto" onclick="sendVia('mailto')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Open in Default Mail App
+          </button>
+
+          <button type="button" class="btn btn-copy" onclick="copyFormattedEmail()">
+            📋 Copy Email Details to Clipboard
+          </button>
+        </div>
+
+        <!-- Feedback Notification -->
+        <div id="toastMessage" class="toast"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Preset Templates
+    const templates = {
+      inquiry: {
+        subject: "General Inquiry regarding your services",
+        body: "Hello,\n\nI hope this email finds you well. I am reaching out to inquire more about your work and availability.\n\nLooking forward to hearing from you!\n\nBest regards,\n"
+      },
+      proposal: {
+        subject: "New Project Proposal & Collaboration",
+        body: "Hi,\n\nI would love to discuss a potential project collaboration with you. We are looking for someone with your expertise.\n\nPlease let me know when you might be free for a short call.\n\nThanks,\n"
+      },
+      greeting: {
+        subject: "Hello from QuickMailer!",
+        body: "Hi there,\n\nJust wanted to send a quick note to connect and say hello!\n\nHAVE A GREAT DAY,\n"
+      }
+    };
+
+    function applyTemplate(type) {
+      const t = templates[type];
+      if (!t) return;
+
+      const senderName = document.getElementById('senderName').value.trim();
+      document.getElementById('subject').value = t.subject;
+      document.getElementById('messageBody').value = t.body + (senderName ? senderName : "[Your Name]");
+      updateCharCount();
+
+      showToast('Template applied successfully!', 'success');
+    }
+
+    function updateCharCount() {
+      const len = document.getElementById('messageBody').value.length;
+      document.getElementById('charCount').textContent = `${len} characters`;
+    }
+
+    function showToast(message, type) {
+      const toast = document.getElementById('toastMessage');
+      toast.textContent = message;
+      toast.className = `toast ${type}`;
+      setTimeout(() => {
+        toast.className = 'toast';
+      }, 4000);
+    }
+
+    function getFormData() {
+      const recipient = document.getElementById('recipientEmail').value.trim();
+      const senderName = document.getElementById('senderName').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const bodyText = document.getElementById('messageBody').value.trim();
+
+      if (!recipient || !subject || !bodyText) {
+        showToast('Please fill in Recipient Email, Subject, and Message Body!', 'error');
+        return null;
+      }
+
+      const fullBody = `${bodyText}\n\n-------------------------\nSent via QuickMailer by: ${senderName || 'Anonymous'}`;
+
+      return { recipient, subject, fullBody };
+    }
+
+    function sendVia(provider) {
+      const data = getFormData();
+      if (!data) return;
+
+      const { recipient, subject, fullBody } = data;
+
+      if (provider === 'gmail') {
+        // Gmail Web Composer URL
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipient)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
+        window.open(gmailUrl, '_blank');
+        showToast('Opening Gmail web composer in a new tab...', 'success');
+
+      } else if (provider === 'outlook') {
+        // Outlook Web Composer URL
+        const outlookUrl = `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(recipient)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
+        window.open(outlookUrl, '_blank');
+        showToast('Opening Outlook web composer in a new tab...', 'success');
+
+      } else if (provider === 'mailto') {
+        // Native Mailto Protocol
+        const mailtoUrl = `mailto:${encodeURIComponent(recipient)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
+        
+        // Use a hidden anchor element to guarantee browser click execution
+        const link = document.createElement('a');
+        link.href = mailtoUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        showToast('Triggering default email application...', 'success');
+      }
+    }
+
+    function copyFormattedEmail() {
+      const data = getFormData();
+      if (!data) return;
+
+      const formattedText = `To: ${data.recipient}\nSubject: ${data.subject}\n\n${data.fullBody}`;
+      
+      navigator.clipboard.writeText(formattedText).then(() => {
+        showToast('Copied email details to clipboard! 📋', 'success');
+      }).catch(err => {
+        showToast('Failed to copy to clipboard', 'error');
+      });
+    }
+  </script>
+
+</body>
+</html>

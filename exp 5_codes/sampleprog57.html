@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>student details</title>
+</head>
+<body>
+    <h2>Student info</h2>
+    <label>Name</label>
+    <input type = "text" id="name"><br><br>
+    <label>Roll no: </label>
+    <input type= "number" id="roll"><br><br>
+    <label>Section:</label>
+    <input type= "text" id="section"><br><br>
+    <button onclick="display()">Submit</button>
+    <h3 id = "result"></h3>
+    <script>
+        function display(){
+            let name = document.getElementById("name").value;
+            let roll = document.getElementById("roll").value;
+            let section = document.getElementById("section").value;
+            document.getElementById("result").innerHTML +
+                "Name: " + name + "<br>" +
+                "Roll no: " + roll + "<br>" +
+                "section: " +section;
+        }
+    </script>
+</body>
+</html>
+
+
+//create an array of numbers and find the maximum and minimum value 

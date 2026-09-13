@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            font-family: Georgia, "Times New Roman", serif;
+            background: linear-gradient(135deg, #e8f5f2, #dceaf7);
+        }
+
+        .welcome-box {
+            width: min(100%, 500px);
+            padding: 42px 32px;
+            border: 2px solid #2b7f78;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #17324d;
+            text-align: center;
+            box-shadow: 0 16px 35px rgba(23, 50, 77, 0.16);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .message {
+            margin: 16px 0 0;
+            color: #567080;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-box">
+        <h1>Welcome to DOM Manipulation</h1>
+        <p class="message">This message will change with JavaScript.</p>
+    </div>
+
+    <script>
+        const heading = document.querySelector("h1");
+        const message = document.querySelector(".message");
+        const headingContent = "DOM Manipulation Made Easy";
+        const messageContent = "The heading and message were changed using a function.";
+
+        function changeContent() {
+            heading.textContent = headingContent;
+            message.textContent = messageContent;
+        }
+
+        changeContent();
+    </script>
+</body>
+</html>

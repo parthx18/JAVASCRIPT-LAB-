@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hover Color Change</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+
+    .box {
+      width: 220px;
+      height: 50px;
+      margin: 15px 0;
+      border: 2px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .red {
+      background-color: red;
+      color: white;
+    }
+
+    .yellow {
+      background-color: yellow;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+    <p>Parth Vishnu (24070521279)</p>
+
+  <div id="redBox" class="box red">Red Box</div>
+  <div id="yellowBox" class="box yellow">Yellow Box</div>
+
+<script>
+  const redBox = document.getElementById("redBox");
+  const yellowBox = document.getElementById("yellowBox");
+
+  function swapColors() {
+    redBox.classList.remove("red");
+    redBox.classList.add("yellow");
+
+    yellowBox.classList.remove("yellow");
+    yellowBox.classList.add("red");
+  }
+
+  function resetColors() {
+    redBox.classList.remove("yellow");
+    redBox.classList.add("red");
+
+    yellowBox.classList.remove("red");
+    yellowBox.classList.add("yellow");
+  }
+
+  redBox.addEventListener("mouseenter", swapColors);
+  yellowBox.addEventListener("mouseenter", swapColors);
+
+  redBox.addEventListener("mouseleave", resetColors);
+  yellowBox.addEventListener("mouseleave", resetColors);
+</script>
+</body>
+</html>

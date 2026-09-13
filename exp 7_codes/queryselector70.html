@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Result</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            font-family: Georgia, "Times New Roman", serif;
+            background: linear-gradient(135deg, #eef7f2, #d9eaf4);
+            color: #17324d;
+        }
+
+        .result-box {
+            width: min(100%, 420px);
+            padding: 32px;
+            border: 1px solid #c5d9d2;
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0 18px 45px rgba(23, 50, 77, 0.16);
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: 30px;
+        }
+
+        .subtitle {
+            margin: 0 0 24px;
+            color: #567080;
+        }
+
+        label {
+            display: block;
+            margin: 16px 0 7px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #aac4c0;
+            border-radius: 4px;
+            font: inherit;
+            color: #17324d;
+        }
+
+        input:focus {
+            outline: 3px solid rgba(43, 127, 120, 0.2);
+            border-color: #2b7f78;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 24px;
+            padding: 13px;
+            border: 0;
+            border-radius: 4px;
+            background: #2b7f78;
+            color: #ffffff;
+            font: bold 16px inherit;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #22655f;
+        }
+
+        #result {
+            min-height: 24px;
+            margin: 22px 0 0;
+            padding: 14px;
+            border-left: 4px solid #e39b3b;
+            background: #fff7e8;
+            color: #704b18;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <main class="result-box">
+        <h1>Student Result</h1>
+        <p class="subtitle">Enter the student details to see the result.</p>
+
+        <label for="studentName">Student name</label>
+        <input id="studentName" type="text" placeholder="Enter name" required>
+
+        <label for="marks">Marks</label>
+        <input id="marks" type="number" min="0" max="100" placeholder="Enter marks" required>
+
+        <button id="resultButton" type="button">Show Result</button>
+        <p id="result" aria-live="polite">Your result will appear here.</p>
+    </main>
+
+    <script>
+        const studentName = document.querySelector("#studentName");
+        const marks = document.querySelector("#marks");
+        const result = document.querySelector("#result");
+
+        document.querySelector("#resultButton").addEventListener("click", function () {
+            const name = studentName.value.trim();
+            const score = marks.value;
+
+            if (!name || score === "") {
+                result.textContent = "Please enter the student's name and marks.";
+                return;
+            }
+
+            if (Number(score) < 0 || Number(score) > 100) {
+                result.textContent = "Please enter marks between 0 and 100.";
+                return;
+            }
+
+            result.textContent = name + " has passed with " + score + " marks.";
+        });
+    </script>
+</body>
+</html>
