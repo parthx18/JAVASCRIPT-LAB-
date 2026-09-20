@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript input example</title>
+</head>
+<body>
+    <h2>Enter your name:</h2>
+    <input type="text" id="name" placeholder="Enter your name">
+    <p id="output"></p>
+    <script>
+        let input = document.getElementById("name");
+        input.addEventListener("input", function() {
+            let name = input.value;
+            document.getElementById("output").textContent = "Hello: " + name;
+        });
+    </script>
+</body>
+</html>
