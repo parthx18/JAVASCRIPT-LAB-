@@ -3,7 +3,6 @@
  * Pure Vanilla JavaScript: Web Audio API synthesis, precision alarm engine,
  * persistence, role categorization, presets, and audio-visual ring alerts.
  */
-
 (() => {
   'use strict';
 
