@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TitanPulse Gym Admission &amp; Membership Portal — Experiment 8</title>
+  <meta name="description" content="State-of-the-art Gym Admission Portal featuring real-time event-driven validation, dynamic plan calculations, live pass generation, and instant receipt rendering.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Ambient Glow -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <div class="portal-wrapper">
+
+    <!-- Top Metadata Pill -->
+    <div class="top-meta-badge">
+      <span class="badge-dot"></span>
+      <span class="meta-item"><strong>Experiment 8</strong> • JavaScript Event-Driven Web Architecture</span>
+      <span class="meta-sep">•</span>
+      <span class="meta-item">Developer: <strong>PARTH VISHNU</strong> (PRN: 24070521279)</span>
+    </div>
+
+    <!-- Header Section -->
+    <header class="portal-header">
+      <div class="brand-line">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6.5 6.5 11 11"></path>
+            <path d="m21 21-1-1"></path>
+            <path d="m3 3 1 1"></path>
+            <path d="m18 22 4-4"></path>
+            <path d="m2 6 4-4"></path>
+            <path d="m3 10 7-7"></path>
+            <path d="m14 21 7-7"></path>
+          </svg>
+        </div>
+        <h1 class="brand-title">TitanPulse <span class="highlight-brand">Gym Admission Portal</span></h1>
+      </div>
+      <p class="brand-subtitle">
+        Real-time event validation (<code>input</code>, <code>change</code>, <code>focus</code>, <code>blur</code>, <code>submit</code>), interactive plan billing engine &amp; dynamic admission pass verification.
+      </p>
+      <div class="header-divider"></div>
+    </header>
+
+    <!-- Top Live Stats Ribbon -->
+    <section class="live-metrics-ribbon" aria-label="Portal Live Statistics">
+      <div class="ribbon-card">
+        <div class="ribbon-icon icon-emerald">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <div class="ribbon-info">
+          <span class="ribbon-label">FORM VALIDATION STATUS</span>
+          <span class="ribbon-val" id="ribbonFormStatus">Awaiting Input</span>
+        </div>
+      </div>
+
+      <div class="ribbon-card">
+        <div class="ribbon-icon icon-indigo">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+        </div>
+        <div class="ribbon-info">
+          <span class="ribbon-label">ACTIVE MEMBERSHIP TIER</span>
+          <span class="ribbon-val" id="ribbonTierName">Pro Athlete ($59/mo)</span>
+        </div>
+      </div>
+
+      <div class="ribbon-card">
+        <div class="ribbon-icon icon-amber">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="1" x2="12" y2="23"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+        </div>
+        <div class="ribbon-info">
+          <span class="ribbon-label">ESTIMATED TOTAL</span>
+          <span class="ribbon-val" id="ribbonTotalAmount">$59.00</span>
+        </div>
+      </div>
+
+      <div class="ribbon-card">
+        <div class="ribbon-icon icon-purple">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+        </div>
+        <div class="ribbon-info">
+          <span class="ribbon-label">REGISTERED APPLICANT</span>
+          <span class="ribbon-val" id="ribbonApplicantName">PARTH VISHNU</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Two-Column Interactive Workspace -->
+    <main class="portal-main-grid">
+
+      <!-- LEFT COLUMN: ADMISSION APPLICATION FORM -->
+      <section class="portal-card form-panel">
+        <div class="card-header-bar">
+          <div class="title-with-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="8.5" cy="7.5" r="4"></circle>
+              <line x1="20" y1="8" x2="20" y2="14"></line>
+              <line x1="23" y1="11" x2="17" y2="11"></line>
+            </svg>
+            <h2>Gym Admission Form</h2>
+          </div>
+          <button type="button" class="btn-preset-fill" id="fillParthPresetBtn" title="Fill with Parth Vishnu details">
+            ⚡ Fill Parth Vishnu (PRN: 24070521279)
+          </button>
+        </div>
+
+        <form id="gymAdmissionForm" novalidate autocomplete="off">
+          
+          <!-- Field Group 1: Personal Details -->
+          <div class="form-section-title">
+            <span class="step-num">1</span>
+            <span>Applicant Personal Information</span>
+          </div>
+
+          <div class="form-row two-col">
+            <div class="input-control" id="ctrlFullName">
+              <label for="fullName">Full Name <span class="req">*</span></label>
+              <input type="text" id="fullName" name="fullName" placeholder="e.g. Parth Vishnu" value="Parth Vishnu" required>
+              <span class="field-feedback" id="fbFullName"></span>
+            </div>
+
+            <div class="input-control" id="ctrlPrn">
+              <label for="prnNumber">Student / Member PRN <span class="req">*</span></label>
+              <input type="text" id="prnNumber" name="prnNumber" placeholder="e.g. 24070521279" value="24070521279" required>
+              <span class="field-feedback" id="fbPrn"></span>
+            </div>
+          </div>
+
+          <div class="form-row two-col">
+            <div class="input-control" id="ctrlEmail">
+              <label for="email">Email Address <span class="req">*</span></label>
+              <input type="email" id="email" name="email" placeholder="parth.vishnu2407@gmail.com" value="parth.vishnu2407@gmail.com" required>
+              <span class="field-feedback" id="fbEmail"></span>
+            </div>
+
+            <div class="input-control" id="ctrlPhone">
+              <label for="phone">Phone Number <span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" placeholder="10-digit mobile, e.g. 9876543210" value="9876543210" required>
+              <span class="field-feedback" id="fbPhone"></span>
+            </div>
+          </div>
+
+          <div class="form-row three-col">
+            <div class="input-control" id="ctrlAge">
+              <label for="age">Age (14 - 80) <span class="req">*</span></label>
+              <input type="number" id="age" name="age" min="14" max="80" placeholder="e.g. 20" value="20" required>
+              <span class="field-feedback" id="fbAge"></span>
+            </div>
+
+            <div class="input-control" id="ctrlGender">
+              <label for="gender">Gender <span class="req">*</span></label>
+              <select id="gender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male" selected>Male</option>
+                <option value="Female">Female</option>
+                <option value="Non-Binary">Non-Binary</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+              <span class="field-feedback" id="fbGender"></span>
+            </div>
+
+            <div class="input-control" id="ctrlBloodGroup">
+              <label for="bloodGroup">Blood Group <span class="req">*</span></label>
+              <select id="bloodGroup" name="bloodGroup" required>
+                <option value="">Select Group</option>
+                <option value="O+" selected>O+</option>
+                <option value="O-">O-</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+              </select>
+              <span class="field-feedback" id="fbBloodGroup"></span>
+            </div>
+          </div>
+
+          <!-- Field Group 2: Membership & Training Details -->
+          <div class="form-section-title">
+            <span class="step-num">2</span>
+            <span>Membership Plan &amp; Training Preferences</span>
+          </div>
+
+          <div class="form-row two-col">
+            <div class="input-control" id="ctrlPlan">
+              <label for="membershipPlan">Membership Plan Tier <span class="req">*</span></label>
+              <select id="membershipPlan" name="membershipPlan" required>
+                <option value="basic" data-price="29">Standard Starter ($29 / month)</option>
+                <option value="pro" data-price="59" selected>Pro Athlete + Cardio ($59 / month)</option>
+                <option value="elite" data-price="99">Elite Titan VIP + Sauna ($99 / month)</option>
+              </select>
+              <span class="field-feedback" id="fbPlan"></span>
+            </div>
+
+            <div class="input-control" id="ctrlDuration">
+              <label for="membershipDuration">Billing Duration <span class="req">*</span></label>
+              <select id="membershipDuration" name="membershipDuration" required>
+                <option value="1" data-discount="0">1 Month (Standard)</option>
+                <option value="3" data-discount="0.05">3 Months (5% off)</option>
+                <option value="6" data-discount="0.10">6 Months (10% off)</option>
+                <option value="12" data-discount="0.20">12 Months (20% off Annual)</option>
+              </select>
+              <span class="field-feedback" id="fbDuration"></span>
+            </div>
+          </div>
+
+          <div class="form-row two-col">
+            <div class="input-control" id="ctrlSlot">
+              <label for="trainingSlot">Preferred Training Slot <span class="req">*</span></label>
+              <select id="trainingSlot" name="trainingSlot" required>
+                <option value="Morning (06:00 AM - 09:00 AM)" selected>Morning (06:00 AM - 09:00 AM)</option>
+                <option value="Noon (11:00 AM - 02:00 PM)">Noon (11:00 AM - 02:00 PM)</option>
+                <option value="Evening (05:00 PM - 08:00 PM)">Evening (05:00 PM - 08:00 PM)</option>
+                <option value="Night Owls (08:00 PM - 11:00 PM)">Night Owls (08:00 PM - 11:00 PM)</option>
+              </select>
+              <span class="field-feedback" id="fbSlot"></span>
+            </div>
+
+            <div class="input-control" id="ctrlGoal">
+              <label for="fitnessGoal">Primary Fitness Goal <span class="req">*</span></label>
+              <select id="fitnessGoal" name="fitnessGoal" required>
+                <option value="Hypertrophy & Muscle Building" selected>Hypertrophy &amp; Muscle Building</option>
+                <option value="Weight Loss & Conditioning">Weight Loss &amp; Conditioning</option>
+                <option value="Strength & Powerlifting">Strength &amp; Powerlifting</option>
+                <option value="Athletic Agility & Endurance">Athletic Agility &amp; Endurance</option>
+                <option value="General Health & Flexibility">General Health &amp; Flexibility</option>
+              </select>
+              <span class="field-feedback" id="fbGoal"></span>
+            </div>
+          </div>
+
+          <!-- Add-ons Multi-check -->
+          <div class="addons-container">
+            <label class="section-sublabel">Select Optional Add-ons:</label>
+            <div class="addons-grid">
+              <label class="addon-card">
+                <input type="checkbox" name="addons" value="trainer" data-addon-price="25">
+                <div class="addon-desc">
+                  <strong>Personal Trainer Support</strong>
+                  <span>+$25/mo • 1-on-1 weekly consultations</span>
+                </div>
+              </label>
+
+              <label class="addon-card">
+                <input type="checkbox" name="addons" value="locker" data-addon-price="10" checked>
+                <div class="addon-desc">
+                  <strong>Dedicated RFID Locker</strong>
+                  <span>+$10/mo • Private digital locker</span>
+                </div>
+              </label>
+
+              <label class="addon-card">
+                <input type="checkbox" name="addons" value="diet" data-addon-price="15">
+                <div class="addon-desc">
+                  <strong>Custom Diet &amp; Nutrition Plan</strong>
+                  <span>+$15/mo • Macronutrient breakdown</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Emergency Contact & Medical Declaration -->
+          <div class="form-section-title">
+            <span class="step-num">3</span>
+            <span>Emergency Contact &amp; Terms Agreement</span>
+          </div>
+
+          <div class="form-row two-col">
+            <div class="input-control" id="ctrlEmergContact">
+              <label for="emergContact">Emergency Contact Person &amp; Phone <span class="req">*</span></label>
+              <input type="text" id="emergContact" name="emergContact" placeholder="e.g. Vishnu (Guardian) - 9822012345" value="Vishnu (Father) - 9822012345" required>
+              <span class="field-feedback" id="fbEmergContact"></span>
+            </div>
+
+            <div class="input-control" id="ctrlStartDate">
+              <label for="startDate">Membership Start Date <span class="req">*</span></label>
+              <input type="date" id="startDate" name="startDate" required>
+              <span class="field-feedback" id="fbStartDate"></span>
+            </div>
+          </div>
+
+          <div class="agreement-box">
+            <label class="agreement-check">
+              <input type="checkbox" id="termsAgreement" required checked>
+              <span>I confirm that the details provided are accurate and agree to follow all safety policies, gym conduct guidelines, and liability waivers of TitanPulse Gym.</span>
+            </label>
+            <span class="field-feedback" id="fbTerms"></span>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="form-action-row">
+            <button type="submit" id="submitAdmissionBtn" class="btn-submit">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Confirm &amp; Generate Admission Pass</span>
+            </button>
+            <button type="button" id="resetAdmissionBtn" class="btn-reset">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+              </svg>
+              <span>Reset Form</span>
+            </button>
+          </div>
+
+          <div id="formLiveNotification" class="form-notification-banner" role="alert"></div>
+
+        </form>
+      </section>
+
+      <!-- RIGHT COLUMN: DYNAMIC LIVE PREVIEW & CONFIRMATION -->
+      <section class="portal-card preview-panel">
+        
+        <!-- Live Pricing Breakdown Card -->
+        <div class="inner-card billing-card">
+          <div class="card-header-bar">
+            <div class="title-with-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                <line x1="2" y1="10" x2="22" y2="10"></line>
+              </svg>
+              <h3>Dynamic Pricing &amp; Billing Engine</h3>
+            </div>
+            <span class="live-pill">Live Updated</span>
+          </div>
+
+          <div class="billing-table">
+            <div class="billing-row">
+              <span>Base Plan (<span id="billPlanLabel">Pro Athlete</span>):</span>
+              <strong id="billBaseRate">$59.00 / mo</strong>
+            </div>
+            <div class="billing-row">
+              <span>Billing Term:</span>
+              <strong id="billDurationLabel">1 Month</strong>
+            </div>
+            <div class="billing-row">
+              <span>Add-on Services:</span>
+              <strong id="billAddonsRate">+$10.00 / mo</strong>
+            </div>
+            <div class="billing-row discount-row" id="billDiscountRow" style="display: none;">
+              <span>Term Discount Applied:</span>
+              <strong id="billDiscountRate">-$0.00</strong>
+            </div>
+            <div class="billing-divider"></div>
+            <div class="billing-row total-row">
+              <span>Payable Total:</span>
+              <span class="grand-total-val" id="billGrandTotal">$69.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Digital Admission Card / Badge Preview -->
+        <div class="inner-card pass-card" id="admissionPassContainer">
+          <div class="card-header-bar">
+            <div class="title-with-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                <circle cx="9" cy="10" r="2"></circle>
+                <line x1="15" y1="8" x2="17" y2="8"></line>
+                <line x1="15" y1="12" x2="17" y2="12"></line>
+                <line x1="7" y1="16" x2="17" y2="16"></line>
+              </svg>
+              <h3>Digital Membership Card Preview</h3>
+            </div>
+            <span class="status-chip" id="passStatusChip">Awaiting Submission</span>
+          </div>
+
+          <div class="membership-badge-ui" id="membershipBadgeUi">
+            <div class="badge-top-row">
+              <div class="badge-gym-name">
+                <span class="badge-icon">⚡</span>
+                <strong>TITANPULSE GYM</strong>
+              </div>
+              <span class="badge-tier-tag" id="badgeTierTag">PRO ATHLETE</span>
+            </div>
+
+            <div class="badge-center-row">
+              <div class="badge-avatar">
+                <span id="badgeAvatarLetter">PV</span>
+              </div>
+              <div class="badge-user-info">
+                <div class="badge-user-name" id="badgeUserName">Parth Vishnu</div>
+                <div class="badge-user-prn">PRN: <span id="badgeUserPrn">24070521279</span></div>
+                <div class="badge-user-id">Card No: <span id="badgeCardId">TP-24070521279</span></div>
+              </div>
+            </div>
+
+            <div class="badge-footer-grid">
+              <div class="badge-detail-item">
+                <span class="b-lbl">TIME SLOT</span>
+                <span class="b-val" id="badgeSlot">Morning (6-9 AM)</span>
+              </div>
+              <div class="badge-detail-item">
+                <span class="b-lbl">BLOOD GROUP</span>
+                <span class="b-val" id="badgeBloodGroup">O+</span>
+              </div>
+              <div class="badge-detail-item">
+                <span class="b-lbl">GOAL</span>
+                <span class="b-val" id="badgeGoal">Hypertrophy</span>
+              </div>
+              <div class="badge-detail-item">
+                <span class="b-lbl">VALID FROM</span>
+                <span class="b-val" id="badgeValidFrom">Today</span>
+              </div>
+            </div>
+
+            <div class="badge-barcode-row">
+              <div class="barcode-lines"></div>
+              <span class="barcode-text" id="badgeBarcodeText">TP-24070521279-OFFICIAL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Success Confirmation Modal / Card (Activated upon submit) -->
+        <div class="inner-card confirmation-card" id="admissionConfirmationCard" style="display: none;">
+          <div class="confirm-icon-box">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <h3 class="confirm-title">Admission Confirmed Successfully!</h3>
+          <p class="confirm-message" id="confirmMessageText">
+            Welcome to TitanPulse Gym, <strong>Parth Vishnu</strong>! Your admission under PRN <strong>24070521279</strong> has been verified and registered into the system.
+          </p>
+
+          <div class="receipt-summary-box" id="receiptSummaryBox">
+            <!-- Populated on successful submission -->
+          </div>
+
+          <div class="confirm-actions">
+            <button type="button" class="btn-print" id="printReceiptBtn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                <rect x="6" y="14" width="12" height="8"></rect>
+              </svg>
+              <span>Print Official Admission Slip</span>
+            </button>
+            <button type="button" class="btn-secondary" id="newAdmissionBtn">New Admission</button>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Portal Footer -->
+    <footer class="portal-footer">
+      <div class="footer-content">
+        <p><strong>Experiment 8:</strong> JavaScript Event Handling, DOM Form Processing, Real-Time Validation &amp; Dynamic Interface Updates</p>
+        <p>Developer: <strong>Parth Vishnu</strong> • PRN: <strong>24070521279</strong> • Web Development Lab • Symbiosis Institute of Technology</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

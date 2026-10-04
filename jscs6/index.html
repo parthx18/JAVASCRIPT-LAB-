@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>String Functions & Regex Studio — Experiment 6</title>
+  <meta name="description"
+    content="Interactive suite for Email Validation, Unstructured Data Extraction, Text Analytics & Regex Parsing">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="studio-container">
+
+    <!-- Top Meta Badge -->
+    <div class="top-meta-badge">
+      <span class="badge-dot"></span>
+      <span class="meta-item"><strong>Experiment 6</strong> • Web Development Lab</span>
+      <span class="meta-sep">•</span>
+      <span class="meta-item">Developer: <strong>PARTH VISHNU</strong> (PRN: 24070521279)</span>
+    </div>
+
+    <!-- Main Title Header -->
+    <header class="studio-header">
+      <h1 class="studio-title">
+        <span class="code-bracket">&lt;/&gt;</span> String Functions &amp; Regex Studio
+      </h1>
+      <p class="studio-subtitle">
+        Interactive suite for <span class="highlight-term">Email Validation</span>,
+        <span class="highlight-term">Unstructured Data Extraction</span>,
+        <span class="highlight-term">Text Analytics</span> &amp;
+        <span class="highlight-term">Regex Parsing</span>
+      </p>
+      <div class="header-divider"></div>
+    </header>
+
+    <!-- Top Summary Stat Cards -->
+    <section class="stats-overview-grid" aria-label="Global Statistics Overview">
+      <!-- Card 1: Words Analyzed -->
+      <div class="summary-card">
+        <div class="summary-icon icon-blue">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <div class="summary-details">
+          <span class="summary-label">WORDS ANALYZED</span>
+          <span class="summary-value" id="globalWordsAnalyzed">34</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Entities Extracted -->
+      <div class="summary-card">
+        <div class="summary-icon icon-teal">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+          </svg>
+        </div>
+        <div class="summary-details">
+          <span class="summary-label">ENTITIES EXTRACTED</span>
+          <span class="summary-value" id="globalEntitiesExtracted">18</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Email Integrity -->
+      <div class="summary-card">
+        <div class="summary-icon icon-amber">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </div>
+        <div class="summary-details">
+          <span class="summary-label">EMAIL INTEGRITY</span>
+          <span class="summary-value status-pass" id="globalEmailIntegrity">Pass (Valid)</span>
+        </div>
+      </div>
+
+      <!-- Card 4: Transformations -->
+      <div class="summary-card">
+        <div class="summary-icon icon-rose">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="5" x2="5" y2="19"></line>
+            <circle cx="6.5" cy="6.5" r="2.5"></circle>
+            <circle cx="17.5" cy="17.5" r="2.5"></circle>
+          </svg>
+        </div>
+        <div class="summary-details">
+          <span class="summary-label">TRANSFORMATIONS</span>
+          <span class="summary-value" id="globalTransformations">7</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <nav class="studio-nav" aria-label="Studio Navigation Tabs">
+      <button class="nav-tab" data-tab="tab-email">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+        <span>1. Email Validator</span>
+      </button>
+
+      <button class="nav-tab" data-tab="tab-data-extraction">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          <path d="M11 8v6M8 11h6"></path>
+        </svg>
+        <span>2. Data Extraction</span>
+      </button>
+
+      <button class="nav-tab" data-tab="tab-string-functions">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        <span>3. String Functions</span>
+      </button>
+
+      <!-- Active tab from screenshots -->
+      <button class="nav-tab active" data-tab="tab-text-analysis">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+          <path d="M2 12h20"></path>
+        </svg>
+        <span>4. Text Analysis (Mail Check)</span>
+      </button>
+
+      <button class="nav-tab" data-tab="tab-regex-tester">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="4 17 10 11 4 5"></polyline>
+          <line x1="12" y1="19" x2="20" y2="19"></line>
+        </svg>
+        <span>5. Regex Tester</span>
+      </button>
+    </nav>
+
+    <!-- TAB 4: TEXT ANALYSIS (MAIL CHECK) - Primary Screenshot Focus -->
+    <main class="tab-content-panel active" id="tab-text-analysis">
+      <div class="analysis-grid">
+
+        <!-- Left Column: Input, Mail Presence, Auxiliary Checks -->
+        <div class="grid-col left-col">
+
+          <!-- Text Input & Content Inspector Card -->
+          <div class="studio-card">
+            <div class="card-header-row">
+              <div class="card-title-group">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+                <h2>Text Input &amp; Content Inspector</h2>
+              </div>
+              <span class="card-tag">Mail &amp; Entity Analyzer</span>
+            </div>
+
+            <div class="field-label-row">
+              <span class="field-subheading">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                Target Text Content for Analysis
+              </span>
+            </div>
+
+            <textarea id="analysisTextInput" class="analysis-textarea"
+              placeholder="Paste or type text to inspect for mail presence, keywords, character sets, and readability..."
+              rows="6">WELCOME TO EXPERIMENT 6! PLEASE SEND YOUR QUESTIONS TO DEVELOPER PARTH VISHNU AT PARTH.VISHNU2407@GMAIL.COM AND SUPPORT@UNIVERSITY.EDU.IN. REGULAR EXPRESSIONS AND STRING METHODS ALLOW DEVELOPERS TO EASILY PARSE, SANITIZE, AND ANALYZE TEXTUAL DATA FOR MAIL PRESENCE.</textarea>
+
+            <div class="test-mail-presence-bar">
+              <span class="presence-bar-label">⚡ Test Mail Presences:</span>
+              <div class="btn-group-samples">
+                <button type="button" class="sample-btn" id="sampleWithMailBtn">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                  Sample WITH Mail
+                </button>
+                <button type="button" class="sample-btn" id="sampleWithoutMailBtn">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                  Sample WITHOUT Mail
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mail Presence Status Card -->
+          <div class="studio-card mail-status-card">
+            <div class="card-header-row">
+              <div class="card-title-group">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <h2>Mail Presence Status</h2>
+              </div>
+              <span class="card-tag">Email Address Detector</span>
+            </div>
+
+            <!-- Big Alert Banner -->
+            <div class="mail-alert-banner alert-success" id="mailAlertBanner">
+              <div class="alert-icon-box" id="mailAlertIcon">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+              <div class="alert-text-group">
+                <div class="alert-title" id="mailAlertTitle">MAIL DETECTED: YES (2 email address(es) found)</div>
+                <div class="alert-sub" id="mailAlertSub">Analyzed text contains valid email/mail address data.</div>
+              </div>
+            </div>
+
+            <!-- Detected Mail Addresses List -->
+            <div class="detected-section">
+              <div class="detected-label">DETECTED MAIL ADDRESSES:</div>
+              <div class="detected-mail-chips" id="detectedMailChips">
+                <div class="mail-chip">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                  </svg>
+                  <span>PARTH.VISHNU2407@GMAIL.COM</span>
+                </div>
+                <div class="mail-chip">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                  </svg>
+                  <span>SUPPORT@UNIVERSITY.EDU.IN</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Auxiliary Detection Stats: Phone Numbers, Web Links, Tags & Mentions -->
+            <div class="aux-detection-grid">
+              <div class="aux-box">
+                <div class="aux-label">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                    </path>
+                  </svg>
+                  <span>Phone Numbers</span>
+                </div>
+                <div class="aux-value aux-neutral" id="auxPhoneStatus">NO</div>
+              </div>
+
+              <div class="aux-box">
+                <div class="aux-label">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                  </svg>
+                  <span>Web Links / URLs</span>
+                </div>
+                <div class="aux-value aux-neutral" id="auxLinkStatus">NO</div>
+              </div>
+
+              <div class="aux-box">
+                <div class="aux-label">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="4" y1="9" x2="20" y2="9"></line>
+                    <line x1="4" y1="15" x2="20" y2="15"></line>
+                    <line x1="10" y1="3" x2="8" y2="21"></line>
+                    <line x1="16" y1="3" x2="14" y2="21"></line>
+                  </svg>
+                  <span>Tags &amp; Mentions</span>
+                </div>
+                <div class="aux-value aux-success" id="auxTagStatus">YES (2)</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right Column: Metrics, Character Set Distribution, Keyword Frequencies -->
+        <div class="grid-col right-col">
+          <div class="studio-card metrics-card">
+
+            <!-- Card Header with Flesch Score Badge -->
+            <div class="card-header-row">
+              <div class="card-title-group">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="20" x2="18" y2="10"></line>
+                  <line x1="12" y1="20" x2="12" y2="4"></line>
+                  <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                <h2>Comprehensive Text Metrics</h2>
+              </div>
+              <span class="flesch-badge" id="fleschScoreBadge">Flesch Score: 23 (Very Confusing)</span>
+            </div>
+
+            <!-- 6-Metric Numeric Grid -->
+            <div class="metric-tiles-grid">
+              <div class="metric-tile">
+                <span class="metric-number" id="metricTotalWords">34</span>
+                <span class="metric-desc">TOTAL WORDS</span>
+              </div>
+              <div class="metric-tile">
+                <span class="metric-number" id="metricCharsWithSpaces">263</span>
+                <span class="metric-desc">CHARS (W/ SPACES)</span>
+              </div>
+              <div class="metric-tile">
+                <span class="metric-number" id="metricCharsNoSpaces">230</span>
+                <span class="metric-desc">CHARS (NO SPACES)</span>
+              </div>
+              <div class="metric-tile">
+                <span class="metric-number" id="metricSentences">7</span>
+                <span class="metric-desc">SENTENCES</span>
+              </div>
+              <div class="metric-tile">
+                <span class="metric-number" id="metricParagraphs">1</span>
+                <span class="metric-desc">PARAGRAPHS</span>
+              </div>
+              <div class="metric-tile">
+                <span class="metric-number" id="metricReadingTime">1 min</span>
+                <span class="metric-desc">READING TIME</span>
+              </div>
+            </div>
+
+            <!-- Character Set Distribution Section -->
+            <div class="char-dist-section">
+              <h3 class="section-title-sm">
+                <span class="letter-badge">A</span> Character Set Distribution
+              </h3>
+
+              <!-- Stacked Visual Bar -->
+              <div class="stacked-bar-container" id="charDistributionBar">
+                <div class="bar-segment bar-upper" style="width: 81.4%;" title="Uppercase: 214"></div>
+                <div class="bar-segment bar-lower" style="width: 0%;" title="Lowercase: 0"></div>
+                <div class="bar-segment bar-digits" style="width: 1.9%;" title="Digits: 5"></div>
+                <div class="bar-segment bar-symbols" style="width: 4.2%;" title="Symbols: 11"></div>
+                <div class="bar-segment bar-spaces" style="width: 12.5%;" title="Spaces: 33"></div>
+              </div>
+
+              <!-- Legend Legend Items -->
+              <div class="dist-legend-row" id="distLegendRow">
+                <span class="legend-item"><span class="dot dot-upper"></span> Uppercase (<strong
+                    id="cntUpper">214</strong>)</span>
+                <span class="legend-item"><span class="dot dot-lower"></span> Lowercase (<strong
+                    id="cntLower">0</strong>)</span>
+                <span class="legend-item"><span class="dot dot-digits"></span> Digits (<strong
+                    id="cntDigits">5</strong>)</span>
+                <span class="legend-item"><span class="dot dot-symbols"></span> Symbols (<strong
+                    id="cntSymbols">11</strong>)</span>
+                <span class="legend-item"><span class="dot dot-spaces"></span> Spaces (<strong
+                    id="cntSpaces">33</strong>)</span>
+              </div>
+            </div>
+
+            <!-- Top Keyword Frequencies -->
+            <div class="keywords-section">
+              <div class="keywords-header">
+                <h3 class="section-title-sm">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="8" y1="6" x2="21" y2="6"></line>
+                    <line x1="8" y1="12" x2="21" y2="12"></line>
+                    <line x1="8" y1="18" x2="21" y2="18"></line>
+                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                  </svg>
+                  Top Keyword Frequencies
+                </h3>
+              </div>
+
+              <div class="keyword-bars-list" id="keywordBarsList">
+                <div class="keyword-item">
+                  <span class="keyword-word">experiment</span>
+                  <div class="kw-bar-track">
+                    <div class="kw-bar-fill" style="width: 25%;"></div>
+                  </div>
+                  <span class="kw-count">1x</span>
+                </div>
+                <div class="keyword-item">
+                  <span class="keyword-word">please</span>
+                  <div class="kw-bar-track">
+                    <div class="kw-bar-fill" style="width: 25%;"></div>
+                  </div>
+                  <span class="kw-count">1x</span>
+                </div>
+                <div class="keyword-item">
+                  <span class="keyword-word">send</span>
+                  <div class="kw-bar-track">
+                    <div class="kw-bar-fill" style="width: 25%;"></div>
+                  </div>
+                  <span class="kw-count">1x</span>
+                </div>
+                <div class="keyword-item">
+                  <span class="keyword-word">your</span>
+                  <div class="kw-bar-track">
+                    <div class="kw-bar-fill" style="width: 25%;"></div>
+                  </div>
+                  <span class="kw-count">1x</span>
+                </div>
+                <div class="keyword-item">
+                  <span class="keyword-word">questions</span>
+                  <div class="kw-bar-track">
+                    <div class="kw-bar-fill" style="width: 25%;"></div>
+                  </div>
+                  <span class="kw-count">1x</span>
+                </div>
+                <div class="keyword-item">
+                  <span class="keyword-word">developer</span>
+                  <div class="kw-bar-track">
+                    <div class="kw-bar-fill" style="width: 25%;"></div>
+                  </div>
+                  <span class="kw-count">1x</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- TAB 1: EMAIL VALIDATOR -->
+    <main class="tab-content-panel" id="tab-email">
+      <div class="tab-inner-card">
+        <div class="card-header-row">
+          <div class="card-title-group">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <h2>Strict RFC-5322 &amp; Domain Email Validator</h2>
+          </div>
+          <span class="card-tag">Pattern Verification</span>
+        </div>
+
+        <p class="tab-explainer">Verify email format compliance, extract domain parts, test mail server top-level
+          domains (TLDs), and validate structure against real-time regex rules.</p>
+
+        <div class="form-row-interactive">
+          <div class="input-with-icon">
+            <input type="email" id="emailTestInput" class="custom-input" placeholder="e.g. parth.vishnu2407@gmail.com"
+              value="parth.vishnu2407@gmail.com">
+            <button type="button" id="checkEmailBtn" class="action-btn-primary">Verify Email</button>
+          </div>
+          <div class="quick-chips">
+            <button class="chip-sm" data-fill="student.24070521279@university.edu.in">University (.edu.in)</button>
+            <button class="chip-sm" data-fill="dev_master99@sub.company.org">Corporate (.org)</button>
+            <button class="chip-sm" data-fill="invalid..double-dot@gmail">Invalid (Bad Format)</button>
+            <button class="chip-sm" data-fill="missing-domain@.com">Missing Domain</button>
+          </div>
+        </div>
+
+        <div id="emailValidationResult" class="validation-display-box"></div>
+      </div>
+    </main>
+
+    <!-- TAB 2: DATA EXTRACTION -->
+    <main class="tab-content-panel" id="tab-data-extraction">
+      <div class="tab-inner-card">
+        <div class="card-header-row">
+          <div class="card-title-group">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+            </svg>
+            <h2>Unstructured Entity &amp; Pattern Extraction</h2>
+          </div>
+          <span class="card-tag">Regex Miner</span>
+        </div>
+
+        <p class="tab-explainer">Instantly mine phone numbers, dates, emails, hex colors, hashtags, IP addresses, and
+          custom patterns from mixed raw text.</p>
+
+        <textarea id="extractionInput" class="analysis-textarea"
+          rows="4">Contact Dr. Roy at +91-98765-43210 or dev.office@ai-labs.org on 2026-10-04. Theme colors are #6366f1 and #10b981. Server IP 192.168.1.100 was pinged with tag #Exp6_Lab.</textarea>
+
+        <div class="extraction-actions">
+          <button id="extractEntitiesBtn" class="action-btn-primary">Extract All Entities</button>
+        </div>
+
+        <div class="entity-cards-grid" id="entityResultsGrid"></div>
+      </div>
+    </main>
+
+    <!-- TAB 3: STRING FUNCTIONS -->
+    <main class="tab-content-panel" id="tab-string-functions">
+      <div class="tab-inner-card">
+        <div class="card-header-row">
+          <div class="card-title-group">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            <h2>JavaScript String Methods Demonstrator</h2>
+          </div>
+          <span class="card-tag">Core String API</span>
+        </div>
+
+        <p class="tab-explainer">Interactive playground for JavaScript String built-ins (Exp 6 Core curriculum:
+          <code>split()</code>, <code>match()</code>, <code>replace()</code>, <code>indexOf()</code>,
+          <code>toUpperCase()</code>, <code>toLowerCase()</code>, <code>trim()</code>, <code>includes()</code>, and
+          <code>slice()</code>).
+        </p>
+
+        <div class="methods-playground">
+          <div class="method-input-row">
+            <label for="methodSourceString">Target String:</label>
+            <input type="text" id="methodSourceString" class="custom-input"
+              value="Antigravity Web Lab: Experiment 6 String Manipulation!">
+          </div>
+
+          <div class="methods-toolbar">
+            <button class="method-btn active" data-method="toUpperCase">toUpperCase()</button>
+            <button class="method-btn" data-method="toLowerCase">toLowerCase()</button>
+            <button class="method-btn" data-method="trim">trim()</button>
+            <button class="method-btn" data-method="split">split(' ')</button>
+            <button class="method-btn" data-method="replace">replace()</button>
+            <button class="method-btn" data-method="includes">includes('Lab')</button>
+            <button class="method-btn" data-method="indexOf">indexOf('Experiment')</button>
+            <button class="method-btn" data-method="slice">slice(0, 15)</button>
+          </div>
+
+          <div class="method-output-box" id="methodOutputBox"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- TAB 5: REGEX TESTER -->
+    <main class="tab-content-panel" id="tab-regex-tester">
+      <div class="tab-inner-card">
+        <div class="card-header-row">
+          <div class="card-title-group">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+            <h2>Interactive Regular Expression Tester &amp; Match Visualizer</h2>
+          </div>
+          <span class="card-tag">Live RegExp Engine</span>
+        </div>
+
+        <p class="tab-explainer">Test regular expressions against custom input in real-time with capture group
+          extraction, flags support (<code>g</code>, <code>i</code>, <code>m</code>), and live syntax highlighting.</p>
+
+        <div class="regex-input-row">
+          <div class="regex-pattern-wrap">
+            <span class="regex-slash">/</span>
+            <input type="text" id="regexPatternInput" class="custom-input regex-input"
+              value="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+            <span class="regex-slash">/</span>
+            <input type="text" id="regexFlagsInput" class="custom-input regex-flags" value="gi">
+          </div>
+          <button id="runRegexBtn" class="action-btn-primary">Evaluate RegExp</button>
+        </div>
+
+        <div class="preset-patterns-row">
+          <span class="preset-label">Quick Regex Presets:</span>
+          <button class="chip-sm" data-pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" data-flags="gi">Email
+            Address</button>
+          <button class="chip-sm" data-pattern="\b\d{10}\b|\b\d{3}[-.\s]\d{3}[-.\s]\d{4}\b" data-flags="g">Phone
+            Numbers</button>
+          <button class="chip-sm" data-pattern="https?:\/\/[^\s]+" data-flags="gi">Web URLs</button>
+          <button class="chip-sm" data-pattern="#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\b" data-flags="g">Hex Colors</button>
+        </div>
+
+        <div class="regex-test-text-area">
+          <label>Test Input Text:</label>
+          <textarea id="regexTestTarget" class="analysis-textarea"
+            rows="4">Hello developer Parth Vishnu! You can contact PARTH.VISHNU2407@GMAIL.COM or support@university.edu.in. Also dial 9876543210 or visit https://developer.io.</textarea>
+        </div>
+
+        <div class="regex-results-container">
+          <div class="regex-matches-count" id="regexMatchesCount">2 Matches Found</div>
+          <div class="regex-highlight-preview" id="regexHighlightPreview"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer with Lab Context -->
+    <footer class="studio-footer">
+      <div class="footer-inner">
+        <span>Experiment 6: String Functions, Email Verification &amp; Regular Expression Analysis</span>
+        <span>JavaScript Web Development Lab • Symbiosis Institute of Technology</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
