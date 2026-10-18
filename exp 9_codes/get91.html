@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>Get Storage Data</h2>
+
+    <p id="result"></p>
+
+    <script>
+        // 1. Save data to local storage
+        localStorage.setItem("name", "Nisha");
+
+        // 2. Retrieve data from local storage
+        let username = localStorage.getItem("name");
+
+        // 3. Display data in the paragraph element
+        document.getElementById("result").textContent = "Name: " + username;
+    </script>
+
+</body>
+</html>

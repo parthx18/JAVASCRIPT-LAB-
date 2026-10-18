@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>Theme Settings</h2>
+
+    <button onclick="saveTheme('light')">Light Mode</button>
+    <button onclick="saveTheme('dark')">Dark Mode</button>
+
+    <p id="result"></p>
+
+    <script>
+        function saveTheme(theme) {
+            localStorage.setItem("theme", theme);
+            document.body.style.backgroundColor =
+                theme === "dark" ? "black" : "white";
+            document.body.style.color =
+                theme === "dark" ? "white" : "black";
+
+            document.getElementById("result").textContent =
+                "Selected Theme: " + localStorage.getItem("theme");
+        }
+    </script>
+
+</body>
+
+</html>
