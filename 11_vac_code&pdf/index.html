@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Class Scheduler & Countdown</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <h1>Class Scheduler &amp; Countdown</h1>
+
+    <section class="card">
+      <h2>Current Time</h2>
+      <div id="clock" class="big">--:--:--</div>
+    </section>
+
+    <section class="card">
+      <h2 id="upcoming">Upcoming: --</h2>
+      <div id="countdown" class="big">00:00</div>
+
+      <div class="row">
+        <button id="startBtn">Start</button>
+        <button id="pauseBtn">Pause</button>
+        <button id="resetBtn">Reset</button>
+      </div>
+
+      <div class="row">
+        <input id="secondsInput" type="number" min="1" placeholder="Enter seconds" />
+        <button id="setBtn">Set</button>
+      </div>
+
+      <p id="status" class="status">Ready for next class.</p>
+    </section>
+
+    <section class="card">
+      <h2>Class Routine</h2>
+      <ul id="routineList" class="routine"></ul>
+    </section>
+
+    <span id="modeBadge" class="badge">ES6 Modules</span>
+    <p id="moduleWarning" class="warning" hidden>
+      ES6 modules are blocked when a page is opened directly from disk (file://).<br />
+      Open this folder in VS Code and use the <b>Live Server</b> extension (Go Live),
+      or run <code>python -m http.server</code> in this folder.
+    </p>
+  </main>
+
+  <!-- Modules (import/export) -->
+  <script type="module" src="js/main.js"></script>
+
+  <!-- Classic script: warns if the module did not load (e.g. file://) -->
+  <script>
+    setTimeout(function () {
+      if (!window.__modulesLoaded) {
+        document.getElementById("moduleWarning").hidden = false;
+        document.getElementById("modeBadge").textContent = "Modules not loaded";
+      }
+    }, 800);
+  </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+.app {
+  max-width: 30rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+h1 { font-size: 1.4rem; margin: 0.4rem 0 0; }
+h2 { font-size: 0.95rem; margin: 0 0 0.6rem; color: #374151; }
+
+.card {
+  width: 100%;
+  background: #fff;
+  border-radius: 0.6rem;
+  padding: 1rem 1.2rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.big {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 0.4rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.6rem 0;
+}
+
+button {
+  background: #2563eb;
+  color: #fff;
+  border: 0;
+  border-radius: 0.4rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+button:hover { background: #1d4ed8; }
+
+input {
+  width: 8rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+}
+
+.status { margin: 0.4rem 0 0; font-size: 0.85rem; font-weight: 600; color: #16a34a; min-height: 1.2rem; }
+
+.routine { list-style: none; margin: 0; padding: 0; }
+.routine li {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 0.5fr;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.85rem;
+  text-align: left;
+}
+.routine li:last-child { border-bottom: 0; }
+.routine li b { font-weight: 700; }
+.routine li span:nth-child(2) { text-align: center; color: #4b5563; }
+.routine li span:nth-child(3) { text-align: right; }
+.routine li.active { background: #eff6ff; }
+
+.badge {
+  font-size: 0.65rem;
+  background: #e2e8f0;
+  color: #475569;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+}
+
+.warning {
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  color: #92400e;
+  padding: 0.7rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .big { font-size: 1.7rem; }
+  .routine li { font-size: 0.8rem; }
+}
