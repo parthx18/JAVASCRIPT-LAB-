@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campus Event &amp; Workshop Registration</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#registerSection">Skip to registration</a>
+
+  <header class="top">
+    <div class="wrap top-inner">
+      <div>
+        <h1>Campus Event &amp; Workshop Registration</h1>
+        <p class="sub">Pick a session, reserve a seat, and watch availability update live.</p>
+      </div>
+      <p class="author">Parth Vishnu<br><span>PRN 24070521279</span></p>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- Live statistics -->
+    <section aria-label="Statistics" class="stats" id="stats">
+      <div class="stat"><span class="stat-num" id="stWorkshops">0</span><span class="stat-lbl">Sessions</span></div>
+      <div class="stat"><span class="stat-num" id="stRegistered">0</span><span class="stat-lbl">Registrations</span></div>
+      <div class="stat"><span class="stat-num" id="stSeatsLeft">0</span><span class="stat-lbl">Seats left</span></div>
+      <div class="stat"><span class="stat-num" id="stFill">0%</span><span class="stat-lbl">Overall filled</span></div>
+      <div class="stat stat-wide">
+        <span class="stat-num small" id="stStorage">0 B</span>
+        <span class="stat-lbl">localStorage used</span>
+        <span class="meter"><span id="stStorageBar"></span></span>
+      </div>
+    </section>
+
+    <!-- Sync bar -->
+    <section class="sync" aria-label="Live sync controls">
+      <div class="sync-status" role="status" aria-live="polite">
+        <span class="dot" id="syncDot"></span>
+        <span id="syncText">Not synced yet</span>
+      </div>
+      <div class="sync-controls">
+        <label for="refreshInterval">Auto-refresh</label>
+        <select id="refreshInterval">
+          <option value="0">Off</option>
+          <option value="5">Every 5 s</option>
+          <option value="10">Every 10 s</option>
+          <option value="30">Every 30 s</option>
+          <option value="60">Every 60 s</option>
+        </select>
+        <span class="countdown" id="countdown" aria-hidden="true"></span>
+        <button type="button" class="btn ghost" id="refreshNow">Refresh now</button>
+        <label class="check"><input type="checkbox" id="simulate"> Simulate other students</label>
+      </div>
+    </section>
+
+    <!-- Workshops -->
+    <section aria-labelledby="wsHeading">
+      <h2 id="wsHeading">Available sessions</h2>
+      <div class="cards" id="workshopList"></div>
+    </section>
+
+    <!-- Registration form -->
+    <section aria-labelledby="regHeading" id="registerSection" class="panel">
+      <h2 id="regHeading">Register for a session</h2>
+      <form id="regForm" novalidate>
+        <div class="grid">
+          <div class="field">
+            <label for="fName">Full name</label>
+            <input id="fName" name="name" type="text" autocomplete="name" placeholder="e.g. Parth Vishnu">
+            <p class="err" data-for="name"></p>
+          </div>
+          <div class="field">
+            <label for="fPrn">PRN (11 digits)</label>
+            <input id="fPrn" name="prn" type="text" inputmode="numeric" maxlength="11" placeholder="e.g. 24070521279">
+            <p class="err" data-for="prn"></p>
+          </div>
+          <div class="field">
+            <label for="fEmail">College email</label>
+            <input id="fEmail" name="email" type="email" autocomplete="email" placeholder="name@college.edu">
+            <p class="err" data-for="email"></p>
+          </div>
+          <div class="field">
+            <label for="fPhone">Mobile number</label>
+            <input id="fPhone" name="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10 digits">
+            <p class="err" data-for="phone"></p>
+          </div>
+          <div class="field">
+            <label for="fDept">Department</label>
+            <select id="fDept" name="dept">
+              <option value="">Select department</option>
+              <option>Computer Engineering</option>
+              <option>Information Technology</option>
+              <option>Electronics &amp; Telecom</option>
+              <option>Mechanical</option>
+              <option>Civil</option>
+              <option>MBA</option>
+            </select>
+            <p class="err" data-for="dept"></p>
+          </div>
+          <div class="field">
+            <label for="fYear">Year</label>
+            <select id="fYear" name="year">
+              <option value="">Select year</option>
+              <option>First year</option>
+              <option>Second year</option>
+              <option>Third year</option>
+              <option>Final year</option>
+            </select>
+            <p class="err" data-for="year"></p>
+          </div>
+          <div class="field span2">
+            <label for="fWorkshop">Session</label>
+            <select id="fWorkshop" name="workshop"></select>
+            <p class="err" data-for="workshop"></p>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Register seat</button>
+          <button type="reset" class="btn ghost" id="resetForm">Clear form</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Roster -->
+    <section aria-labelledby="rosterHeading" class="panel">
+      <div class="roster-head">
+        <h2 id="rosterHeading">Roster <span class="count" id="rosterCount"></span></h2>
+        <button type="button" class="btn ghost" id="exportCsv">Export CSV</button>
+      </div>
+
+      <div class="toolbar">
+        <div class="field">
+          <label for="rSearch">Search</label>
+          <input id="rSearch" type="search" placeholder="Name, PRN, email…">
+        </div>
+        <div class="field">
+          <label for="rWorkshop">Session</label>
+          <select id="rWorkshop"></select>
+        </div>
+        <div class="field">
+          <label for="rDept">Department</label>
+          <select id="rDept"></select>
+        </div>
+        <div class="field">
+          <label for="rSort">Sort by</label>
+          <select id="rSort">
+            <option value="time:desc">Newest first</option>
+            <option value="time:asc">Oldest first</option>
+            <option value="name:asc">Name A–Z</option>
+            <option value="name:desc">Name Z–A</option>
+            <option value="prn:asc">PRN ascending</option>
+            <option value="workshop:asc">Session A–Z</option>
+            <option value="dept:asc">Department A–Z</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table id="rosterTable">
+          <thead>
+            <tr>
+              <th data-sort="name" tabindex="0" scope="col">Name</th>
+              <th data-sort="prn" tabindex="0" scope="col">PRN</th>
+              <th data-sort="email" tabindex="0" scope="col">Email</th>
+              <th data-sort="dept" tabindex="0" scope="col">Department</th>
+              <th data-sort="year" tabindex="0" scope="col">Year</th>
+              <th data-sort="workshop" tabindex="0" scope="col">Session</th>
+              <th data-sort="time" tabindex="0" scope="col">Registered</th>
+              <th scope="col"><span class="sr">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody id="rosterBody"></tbody>
+        </table>
+      </div>
+      <p class="empty" id="rosterEmpty" hidden>No registrations match. Register a student above or clear the filters.</p>
+
+      <div class="danger-zone">
+        <button type="button" class="btn ghost" id="loadSample">Load sample data</button>
+        <button type="button" class="btn danger" id="clearAll">Delete all registrations</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot wrap">
+    <p>Built by Parth Vishnu (PRN 24070521279) · jQuery, localStorage &amp; AJAX</p>
+  </footer>
+
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

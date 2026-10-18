@@ -1,0 +1,10 @@
+{
+  "workshops": [
+    { "id": "ws1", "title": "Intro to Machine Learning with Python", "type": "Workshop", "date": "2026-11-03", "time": "10:00", "venue": "Seminar Hall A", "capacity": 30, "seatsTaken": 12 },
+    { "id": "ws2", "title": "Web Development Bootcamp: HTML, CSS & JS", "type": "Workshop", "date": "2026-11-05", "time": "14:00", "venue": "Computer Lab 3", "capacity": 24, "seatsTaken": 18 },
+    { "id": "ws3", "title": "Hackathon 2026: Build for Campus", "type": "Event", "date": "2026-11-12", "time": "09:00", "venue": "Innovation Centre", "capacity": 40, "seatsTaken": 22 },
+    { "id": "ws4", "title": "Resume & Interview Skills", "type": "Workshop", "date": "2026-11-15", "time": "11:30", "venue": "Auditorium B", "capacity": 20, "seatsTaken": 17 },
+    { "id": "ws5", "title": "Cybersecurity Capture-the-Flag", "type": "Event", "date": "2026-11-20", "time": "16:00", "venue": "Network Lab", "capacity": 16, "seatsTaken": 6 },
+    { "id": "ws6", "title": "Cloud Computing Essentials", "type": "Workshop", "date": "2026-11-24", "time": "10:30", "venue": "Seminar Hall B", "capacity": 28, "seatsTaken": 9 }
+  ]
+}
