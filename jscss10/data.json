@@ -1,0 +1,194 @@
+[
+ {
+  "id": 1,
+  "name": "Parth Vishnu",
+  "email": "parth.vishnu@symbiosis.edu.in",
+  "roll": "24070521279",
+  "department": "Computer Science & Engineering",
+  "cgpa": 9.41,
+  "attendance": 96,
+  "status": "Dean's List",
+  "skills": [
+   "JavaScript",
+   "Python",
+   "React",
+   "Docker"
+  ]
+ },
+ {
+  "id": 2,
+  "name": "Priya Sharma",
+  "email": "priya.sharma@symbiosis.edu.in",
+  "roll": "24070521118",
+  "department": "Artificial Intelligence & ML",
+  "cgpa": 9.38,
+  "attendance": 94,
+  "status": "Dean's List",
+  "skills": [
+   "Python",
+   "PyTorch",
+   "OpenCV",
+   "FastAPI"
+  ]
+ },
+ {
+  "id": 3,
+  "name": "Rohan Deshmukh",
+  "email": "rohan.deshmukh@symbiosis.edu.in",
+  "roll": "24070521131",
+  "department": "Computer Science & Engineering",
+  "cgpa": 8.76,
+  "attendance": 91,
+  "status": "Good Standing",
+  "skills": [
+   "Java",
+   "Spring Boot",
+   "MySQL",
+   "AWS"
+  ]
+ },
+ {
+  "id": 4,
+  "name": "Sneha Kulkarni",
+  "email": "sneha.kulkarni@symbiosis.edu.in",
+  "roll": "24070521142",
+  "department": "Data Science",
+  "cgpa": 8.92,
+  "attendance": 89,
+  "status": "Good Standing",
+  "skills": [
+   "R",
+   "Tableau",
+   "SQL",
+   "Pandas"
+  ]
+ },
+ {
+  "id": 5,
+  "name": "Aditya Patil",
+  "email": "aditya.patil@symbiosis.edu.in",
+  "roll": "24070521155",
+  "department": "Information Technology",
+  "cgpa": 7.64,
+  "attendance": 79,
+  "status": "Needs Attention",
+  "skills": [
+   "HTML",
+   "CSS",
+   "PHP",
+   "jQuery"
+  ]
+ },
+ {
+  "id": 6,
+  "name": "Ananya Iyer",
+  "email": "ananya.iyer@symbiosis.edu.in",
+  "roll": "24070521163",
+  "department": "Artificial Intelligence & ML",
+  "cgpa": 9.57,
+  "attendance": 98,
+  "status": "Dean's List",
+  "skills": [
+   "TensorFlow",
+   "NLP",
+   "Python",
+   "Keras"
+  ]
+ },
+ {
+  "id": 7,
+  "name": "Vikram Joshi",
+  "email": "vikram.joshi@symbiosis.edu.in",
+  "roll": "24070521174",
+  "department": "Information Technology",
+  "cgpa": 8.15,
+  "attendance": 85,
+  "status": "Good Standing",
+  "skills": [
+   "Node.js",
+   "MongoDB",
+   "Express",
+   "React"
+  ]
+ },
+ {
+  "id": 8,
+  "name": "Meera Nair",
+  "email": "meera.nair@symbiosis.edu.in",
+  "roll": "24070521186",
+  "department": "Data Science",
+  "cgpa": 9.06,
+  "attendance": 93,
+  "status": "Dean's List",
+  "skills": [
+   "Power BI",
+   "SQL",
+   "Spark",
+   "Python"
+  ]
+ },
+ {
+  "id": 9,
+  "name": "Kunal Bhosale",
+  "email": "kunal.bhosale@symbiosis.edu.in",
+  "roll": "24070521197",
+  "department": "Computer Science & Engineering",
+  "cgpa": 7.28,
+  "attendance": 74,
+  "status": "Needs Attention",
+  "skills": [
+   "C++",
+   "Linux",
+   "Git",
+   "Bash"
+  ]
+ },
+ {
+  "id": 10,
+  "name": "Ishita Kapoor",
+  "email": "ishita.kapoor@symbiosis.edu.in",
+  "roll": "24070521208",
+  "department": "Information Technology",
+  "cgpa": 8.47,
+  "attendance": 90,
+  "status": "Good Standing",
+  "skills": [
+   "Angular",
+   "TypeScript",
+   "Firebase",
+   "Sass"
+  ]
+ },
+ {
+  "id": 11,
+  "name": "Arjun Menon",
+  "email": "arjun.menon@symbiosis.edu.in",
+  "roll": "24070521219",
+  "department": "Computer Science & Engineering",
+  "cgpa": 8.83,
+  "attendance": 92,
+  "status": "Good Standing",
+  "skills": [
+   "Go",
+   "Kubernetes",
+   "Redis",
+   "gRPC"
+  ]
+ },
+ {
+  "id": 12,
+  "name": "Tanvi Rao",
+  "email": "tanvi.rao@symbiosis.edu.in",
+  "roll": "24070521230",
+  "department": "Artificial Intelligence & ML",
+  "cgpa": 9.12,
+  "attendance": 95,
+  "status": "Dean's List",
+  "skills": [
+   "Scikit-learn",
+   "Pandas",
+   "SQL",
+   "Python"
+  ]
+ }
+]
