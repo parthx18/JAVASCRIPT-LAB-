@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON Data Loader &amp; Table Renderer - Experiment 10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page">
+  <!-- Top bar: developer badge + dark mode toggle -->
+  <div class="topbar">
+    <div class="chip"><span class="dot"></span><b>Experiment 10</b> &bull; Developer: <b id="devName"></b> (PRN: <b id="devPrn"></b>)</div>
+    <button class="chip-btn" id="themeBtn">🌙 Dark Mode</button>
+  </div>
+
+  <h1>JSON Data Loader &amp; Table Renderer</h1>
+  <p class="subtitle">Asynchronous data fetching demonstrated with native ES6 fetch() API and jQuery $.getJSON(), dynamically rendered into an interactive data table.</p>
+
+  <!-- Control panel -->
+  <section class="panel">
+    <div class="buttons">
+      <button class="btn btn-fetch" id="fetchBtn">Load via Native fetch() <span class="tag">ES6</span></button>
+      <button class="btn btn-jquery" id="jqueryBtn">Load via jQuery $.getJSON() <span class="tag">jQuery</span></button>
+      <button class="btn btn-ghost" id="clearBtn">Clear Table</button>
+      <button class="btn btn-ghost" id="csvBtn">Export CSV</button>
+    </div>
+
+    <div class="source"><label for="sourceSel">Data Source:</label>
+      <select id="sourceSel"><option>Local dataset (data.json)</option></select></div>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-label">ACTIVE API METHOD</span><span class="stat-value" id="statMethod">None</span></div>
+      <div class="stat"><span class="stat-label">EXECUTION LATENCY</span><span class="stat-value" id="statLatency">-</span></div>
+      <div class="stat"><span class="stat-label">RECORDS COUNT</span><span class="stat-value" id="statCount">0 items</span></div>
+      <div class="stat"><span class="stat-label">REQUEST STATUS</span><span class="stat-value" id="statStatus">Idle</span></div>
+    </div>
+    <p class="note" id="note"></p>
+  </section>
+
+  <!-- Table section -->
+  <section class="panel">
+    <div class="toolbar">
+      <input type="text" id="searchBox" placeholder="Search by name, roll no, department or skill...">
+      <div class="filters">
+        <select id="deptFilter"><option value="">All Departments</option></select>
+        <select id="statusFilter"><option value="">All Statuses</option></select>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-key="id">ID <span class="arrow"></span></th>
+            <th data-key="name">STUDENT DETAILS <span class="arrow"></span></th>
+            <th data-key="roll">ROLL NO <span class="arrow"></span></th>
+            <th data-key="department">DEPARTMENT <span class="arrow"></span></th>
+            <th data-key="cgpa">CGPA <span class="arrow"></span></th>
+            <th data-key="attendance">ATTENDANCE <span class="arrow"></span></th>
+            <th data-key="status">STATUS <span class="arrow"></span></th>
+            <th>SKILLS / TECH STACK</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr><td colspan="9" class="empty">No data loaded. Click a load button above.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="detail" id="detail"></div>
+  </section>
+</div>
+
+<!-- jQuery (needed for $.getJSON) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
